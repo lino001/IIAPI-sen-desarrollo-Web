@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cochabamba</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alkalami&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet">
+    <style>
+        h1{
+            font-family: 'Bungee Spice', cursive;
+            text-align: center;
+        }
+        h3{
+            font-family: 'Anton', sans-serif;
+            font-family: 'Bungee Spice', cursive;
+        }
+        
+        #map{
+            width:1000px;
+            height:500px;
+            text-align: "center";
+        
+        }
+    </style>    
+    <h1>Sitios Recomendados</h1>
+    <select name="select-ubication" id="select-ubication">
+        <option value="-1">QUE SITIO DESEA VISITAR</option>
+        <option value="-17.366082300316464, -66.27651971413229">Marcador Rene Crespo R.</option>
+        <option value="-17.382361724417166, -66.28101605185773">Poligono Prado Villa Moderna</option>
+        <option value="-17.393980500666938, -66.27740127199678">Ruta Plaza Bolivar Quillacollo</option>
+    </select>
+</head>
+<body>
+
+    <div id="map"></div>
+    <script type="text/javascript">
+
+        document.getElementById('select-ubication').addEventListener('change', function(e){
+            let coords = e.target.value.split(",");
+            map.flyTo(coords,17);
+        })
+
+        var map = L.map('map').setView([-17.388284768889573, -66.15575781575984],17);
+
+        L.tileLayer('https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}.png?key=GefuU4TDDudibMXPsoGw',{
+            atribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+        }).addTo(map);
+        var ruta = {
+                    "type": "FeatureCollection",
+                    "features": [
+                        {
+                        "type": "Feature",
+                        "properties": {},
+                        "geometry": {
+                            "type": "LineString",
+                            "coordinates": [
+                            [
+                                -66.2730073928833,
+                                -17.39366452800861
+                            ],
+                            [
+                                -66.27448797225952,
+                                -17.39374643393225
+                            ],
+                            [
+                                -66.27813577651978,
+                                -17.394135486568647
+                            ],
+                            [
+                                -66.28049612045288,
+                                -17.39436072719042
+                            ],
+                            [
+                                -66.28161191940308,
+                                -17.39442215640275
+                            ],
+                            [
+                                -66.2815260887146,
+                                -17.395159305341448
+                            ]
+                            ]
+                        }
+                        }
+                    ]
+                    }
+        L.geoJson(ruta).addTo(map);
+
+        var marker = L.marker([-17.366082300316464, -66.27651971413229]).addTo(map);
+        marker.bindPopup("<h3>U.E. Rene Crespo Rico</h3><p>Zona Norte Quillacollo</p>").openPopup();
+
+        var poligono = L.polygon([
+        [
+            -17.381992558947196,      
+            -66.27800703048706
+              
+            ],
+            [
+            -17.382115425656664,  
+            -66.2795090675354
+              
+            ],
+            [
+            -17.38224853116553,  
+            -66.28157436847687
+              
+            ],
+            [
+            -17.38227924780768,  
+            -66.28249168395995
+              
+            ],
+            [
+            -17.383006206833713,  
+            -66.28251314163208
+              
+            ],
+            [
+            -17.382985729154193,  
+            -66.28154754638672
+              
+            ],
+            [
+            -17.382555697355,
+            -66.28162264823914
+             
+            
+              
+            ],
+            [
+            -17.382371397703185,  
+            -66.27957344055176
+              
+            ],
+            [
+            -17.38216662009461,  
+            -66.27796411514282
+              
+            ],
+            [
+            -17.381992558947196,  
+            -66.27800703048706
+              
+            ]
+        ]).addTo(map);
+        poligono.bindPopup("<h1>Plaza principal</h1><p>Zona central Cochabamaba</p>").openmPopup();
+
+
+    </script>
+
+</body>
+</html>
